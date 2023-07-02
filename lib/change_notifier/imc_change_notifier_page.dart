@@ -1,30 +1,22 @@
-import 'dart:math';
-
+import 'package:calculadoraimc/change_notifier/imc_change_notifier_controller.dart';
 import 'package:calculadoraimc/widgets/imc_gauge.dart';
-import 'package:calculadoraimc/widgets/imc_gauge_range.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-class Template extends StatefulWidget {
-  const Template({Key? key}) : super(key: key);
+class ImcChangeNotifierPage extends StatefulWidget {
+  const ImcChangeNotifierPage({Key? key}) : super(key: key);
 
   @override
-  State<Template> createState() => _TemplateState();
+  State<ImcChangeNotifierPage> createState() => _ImcChangeNotifierPageState();
 }
 
-class _TemplateState extends State<Template> {
+class _ImcChangeNotifierPageState extends State<ImcChangeNotifierPage> {
   final pesoEC = TextEditingController();
   final alturaEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  var imc = 0.0;
 
-  _calcularIMC({required double peso, required double altura}) {
-    setState(() {
-      imc = peso / pow(altura, 2);
-    });
-  }
+  final controller = ImcChangeNotifierController();
 
   @override
   void dispose() {
@@ -35,9 +27,16 @@ class _TemplateState extends State<Template> {
 
   @override
   Widget build(BuildContext context) {
+    print('''
+      ***********************************
+      ------------------------------------  
+        BUILD DA TELA COMPLETA SO UMA VEZ
+      ------------------------------------
+      ***********************************
+    ''');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('IMC SetState'),
+        title: const Text('IMC ChangeNotifier'),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -46,7 +45,12 @@ class _TemplateState extends State<Template> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                ImcGauge(imc: imc),
+                AnimatedBuilder(
+                  animation: controller,
+                  builder: (context, child) {
+                    return ImcGauge(imc: controller.imc);
+                  },
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -67,6 +71,7 @@ class _TemplateState extends State<Template> {
                     if (value == null || value.isEmpty) {
                       return 'Peso obrigatório';
                     }
+                    return null;
                   },
                 ),
                 const SizedBox(
@@ -89,6 +94,7 @@ class _TemplateState extends State<Template> {
                     if (value == null || value.isEmpty) {
                       return 'Altura obrigatória';
                     }
+                    return null;
                   },
                 ),
                 const SizedBox(
@@ -106,7 +112,7 @@ class _TemplateState extends State<Template> {
                       double peso = formatter.parse(pesoEC.text) as double;
                       double altura = formatter.parse(alturaEC.text) as double;
 
-                      _calcularIMC(peso: peso, altura: altura);
+                      controller.calcularIMC(peso: peso, altura: altura);
                     }
                   },
                   child: const Text('Calcular IMC'),

@@ -1,9 +1,7 @@
 import 'package:calculadoraimc/home_page.dart';
 import 'package:flutter/material.dart';
 
-var routes = {
-  '/': (_) => const HomePage()
-};
+var routes = {'/': (_) => const HomePage()};
 
 void main() {
   runApp(
@@ -20,7 +18,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: Colors.teal.shade100,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            minimumSize: const MaterialStatePropertyAll(
+              Size(230, 45),
+            ),
+            shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7),
+              ),
+            ),
+          ),
+        ),
+      ),
       routes: routes,
     );
   }

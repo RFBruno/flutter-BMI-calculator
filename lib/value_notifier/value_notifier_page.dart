@@ -1,29 +1,25 @@
 import 'dart:math';
 
 import 'package:calculadoraimc/widgets/imc_gauge.dart';
-import 'package:calculadoraimc/widgets/imc_gauge_range.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-class Template extends StatefulWidget {
-  const Template({Key? key}) : super(key: key);
+class ValueNotifierPage extends StatefulWidget {
+  const ValueNotifierPage({Key? key}) : super(key: key);
 
   @override
-  State<Template> createState() => _TemplateState();
+  State<ValueNotifierPage> createState() => _ValueNotifierPageState();
 }
 
-class _TemplateState extends State<Template> {
+class _ValueNotifierPageState extends State<ValueNotifierPage> {
   final pesoEC = TextEditingController();
   final alturaEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  var imc = 0.0;
+  var imc = ValueNotifier(0.0);
 
   _calcularIMC({required double peso, required double altura}) {
-    setState(() {
-      imc = peso / pow(altura, 2);
-    });
+    imc.value = peso / pow(altura, 2);
   }
 
   @override
@@ -35,9 +31,16 @@ class _TemplateState extends State<Template> {
 
   @override
   Widget build(BuildContext context) {
+    print('''
+      ***********************************
+      ------------------------------------  
+        BUILD DA TELA COMPLETA SO UMA VEZ
+      ------------------------------------
+      ***********************************
+    ''');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('IMC SetState'),
+        title: const Text('IMC Value Notifier'),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -46,7 +49,12 @@ class _TemplateState extends State<Template> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                ImcGauge(imc: imc),
+                ValueListenableBuilder<double>(
+                  valueListenable: imc,
+                  builder: (_, imcValue, __) {
+                    return ImcGauge(imc: imcValue);
+                  },
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -67,6 +75,7 @@ class _TemplateState extends State<Template> {
                     if (value == null || value.isEmpty) {
                       return 'Peso obrigatório';
                     }
+                    return null;
                   },
                 ),
                 const SizedBox(
@@ -89,6 +98,7 @@ class _TemplateState extends State<Template> {
                     if (value == null || value.isEmpty) {
                       return 'Altura obrigatória';
                     }
+                    return null;
                   },
                 ),
                 const SizedBox(
