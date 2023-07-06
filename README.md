@@ -33,6 +33,8 @@ Here are the technologies used in this project.
 
 ## How to use
 
+https://github.com/RFBruno/flutter-BMI-calculator/assets/42716180/1362399f-4d69-4b0d-ade5-3e0effdbf992
+
 
 ## Features
 
