@@ -1,16 +1,56 @@
-# calculadoraimc
 
-A new Flutter project.
+![Logo of the project](https://firebasestorage.googleapis.com/v0/b/portfolio-a7442.appspot.com/o/profile%20github%20images%2Fgithubcapa.png?alt=media&token=091ec4e2-aa66-4b89-a768-6c1a026a262e)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## BMI Calculator
+This is a flutter app, developed for state management practice.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Technology 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Here are the technologies used in this project.
+
+* Flutter version  3.10.0
+* Dart version 3.0.0
+
+
+## Services Used
+
+* Github
+
+
+## Flutter packages
+
+* syncfusion_flutter_gauges
+* currency_text_input_formatter
+* intl
+
+
+## Getting started
+
+* Dependency
+  - Flutter environment   
+
+## How to use
+
+
+## Features
+
+The main features of the application are:
+ - Calculate BMI.
+
+
+## Links
+  - Repository: https://github.com/RFBruno/flutter-BMI-calculator
+
+  ## Versioning
+
+  1.0.0.0
+
+
+  ## Authors
+
+  * **Bruno Rafael** 
+
+  Please follow github and join us!
+  Thanks to visiting me and good coding!
